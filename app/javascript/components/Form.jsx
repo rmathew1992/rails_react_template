@@ -1,0 +1,55 @@
+import PropTypes from 'prop-types'
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+
+import FirstPage from './FirstPage'
+import SecondPage from './SecondPage'
+import ThirdPage from './ThirdPage'
+
+class Form extends React.Component {
+  constructor(props) {
+    super(props)
+    this.nextPage = this.nextPage.bind(this)
+    this.previousPage = this.previousPage.bind(this)
+    this.state = {
+      page: 1
+    }
+  }
+
+  nextPage() {
+    this.setState({ page: this.state.page + 1 })
+  }
+
+  previousPage() {
+    this.setState({ page: this.state.page - 1 })
+  }
+
+  render () {
+    const { onSubmit } = this.props
+    const { page } = this.state
+    return (
+      <div>
+        {page === 1 && <FirstPage onSubmit={this.nextPage} />}
+        {page === 2 && (
+          <SecondPage
+            previousPage={this.previousPage}
+            onSubmit={this.nextPage} 
+          />)
+        }
+        {page === 3 && (
+          <ThirdPage 
+            previousPage={this.previousPage}
+            onSubmit={onSubmit}
+          />)
+        }
+      </div>
+    )
+  }
+}
+
+Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+}
+
+
+export default Form

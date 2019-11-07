@@ -1,12 +1,10 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 
-function counter(state = 0, action) {
-  switch (action.type) {
-    case 'SUBMIT_FORM':
-      return state + action.payload
-    default:
-      return state
-  }
-}
+const rootReducer = combineReducers({
+  form: formReducer
+})
 
-let store = createStore(counter)
+const store = createStore(rootReducer)
+
+export default store
