@@ -10,7 +10,7 @@ class SecondPage extends React.Component {
     <div>
       <Field
               name="zipCode"
-              type="select-multi"
+              type="text"
               component={renderField}
               label={`Great to meet you ${firstName}, what's your ZIP code?`}
       placeholder="01243"
