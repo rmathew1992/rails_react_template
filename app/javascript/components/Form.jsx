@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { Field, reduxForm, formValueSelector} from 'redux-form'
 
 import FirstPage from './FirstPage'
 import SecondPage from './SecondPage'
@@ -25,19 +26,15 @@ class Form extends React.Component {
   }
 
   render () {
-    const { onSubmit } = this.props
+    const { onSubmit, firstName } = this.props
     const { page } = this.state
+
     return (
       <div>
         {page === 1 && <FirstPage onSubmit={this.nextPage} />}
-        {page === 2 && (
-          <SecondPage
-            previousPage={this.previousPage}
-            onSubmit={this.nextPage} 
-          />)
-        }
+        {page === 2 && <SecondPage onSubmit={this.nextPage} firstName={firstName} />}
         {page === 3 && (
-          <ThirdPage 
+          <ThirdPage
             previousPage={this.previousPage}
             onSubmit={onSubmit}
           />)
@@ -51,5 +48,16 @@ Form.propTypes = {
   onSubmit: PropTypes.func.isRequired
 }
 
+const mapStateToProps = state => {
+  return {
+    firstName: formValueSelector("test")(state, 'firstName')
+  }
+};
 
-export default Form
+const mapDispatchToProps = dispatch => ({ });
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Form);
+

@@ -5,14 +5,14 @@ import renderField from './RenderField'
 
 class SecondPage extends React.Component {
   render () {
-    const { handleSubmit, previousPage } = this.props
+    const { firstName, handleSubmit, previousPage} = this.props
     return (<form onSubmit={handleSubmit}>
     <div>
       <Field
               name="zipCode"
-              type="text"
+              type="select-multi"
               component={renderField}
-              label="Great to meet you Test, what's your ZIP code?"
+              label={`Great to meet you ${firstName}, what's your ZIP code?`}
       placeholder="01243"
             />
       <button type="button" className="previous" onClick={previousPage}>
