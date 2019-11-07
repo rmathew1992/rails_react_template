@@ -31,11 +31,11 @@ class Form extends React.Component {
 
     return (
       <div>
-        {page === 1 && <FirstPage onSubmit={this.nextPage} />}
+        {page === 3 && <FirstPage onSubmit={this.nextPage} />}
         {page === 2 && <SecondPage 
           previousPage={this.previousPage}
           onSubmit={this.nextPage} firstName={firstName} />}
-        {page === 3 && (
+        {page === 1 && (
           <ThirdPage
             previousPage={this.previousPage}
             onSubmit={onSubmit}

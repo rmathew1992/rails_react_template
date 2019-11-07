@@ -4,21 +4,6 @@ import validate from '../validate'
 import renderField from './RenderField'
 
 class ThirdPage extends React.Component {
-  componentDidMount(props) {
-    // const apiResponse = {
-    //   "dog":[
-    //     { 
-    //       "species":"Dog",
-    //       "type":"PureBreed",
-    //       "name":"Affenpinscher",
-    //       "code":"Dog~PureBreed~Affenpinscher"
-    //     }
-    //   ]
-    // }
-    // const breeds = apiResponse["dog"].map (breedInfo => {name: breedInfo["name"], value: breedInfo["code"]})
-    // props.breeds = breeds
-  }
-
   render () {
     const { handleSubmit, previousPage } = this.props
     const breeds = [
@@ -28,8 +13,8 @@ class ThirdPage extends React.Component {
     return (<form onSubmit={handleSubmit}>
     <div>
       <Field name="breeds" component="select">
-        {breeds.each (breed => {
-          <option value={breed["value"]}>Red</option>
+        {breeds.map (function(breed) {
+          return <option key={breed["value"]} value={breed["value"]}>{breed["name"]}</option>;
         })}
       </Field>
       <button type="button" className="previous" onClick={previousPage}>
